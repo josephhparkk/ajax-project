@@ -1,13 +1,12 @@
 /* eslint-disable no-console */
 
 var $search = document.querySelector('#searching');
-$search.addEventListener('submit', getSearchText);
-
-function getSearchText(title) {
-  var searchText = title;
-  getShowId(searchText);
+$search.addEventListener('submit', getSearchValue);
+function getSearchValue(event) {
+  event.preventDefault();
+  var text = $search.elements.search.value;
+  getShowId(text);
 }
-getSearchText('game of thrones');
 
 function getShowId(title) {
   var xhr = new XMLHttpRequest();
