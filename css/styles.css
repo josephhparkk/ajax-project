@@ -54,3 +54,7 @@ input:hover {
   object-fit: cover;
   color: #5065a8;
 }
+
+.search-logo:hover {
+  cursor: pointer;
+}
