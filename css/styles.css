@@ -19,6 +19,10 @@ header {
   color: #5065a8;
 }
 
+.fa-house:hover {
+  cursor: pointer;
+}
+
 .nav-bar {
   text-align: right;
 }
@@ -28,7 +32,6 @@ header {
 .search {
   text-align: center;
   margin-top: 1rem;
-  margin-left: 0.7rem;
 }
 
 input {
@@ -42,6 +45,13 @@ input {
 
 input:hover {
   cursor: pointer;
+}
+
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration {
+  display: none;
 }
 
 .search-logo {
@@ -60,6 +70,7 @@ input:hover {
 
 /* feature #2 */
 .small-container {
+  max-width: 390px;
   margin: 0 auto;
   justify-content: center;
   display: flex;
@@ -68,7 +79,7 @@ input:hover {
 .card {
   background-color: #f9f7f1;
   margin-top: 1rem;
-  width: 390px;
+  width: 100%;
 }
 
 .poster {
@@ -78,7 +89,7 @@ input:hover {
 
 .fa-star {
   color: #f3c317;
-  margin-top: 1.5rem;
+  margin-top: 1.4rem;
   margin-left: 0.3rem;
 }
 
@@ -97,27 +108,37 @@ input:hover {
 }
 
 .rating {
-  margin-top: 1.35rem;
+  margin-top: 1.5rem;
   margin-left: 0.5rem;
+  font-size: 14px;
+}
+
+.first-line {
+  display: flex;
+  padding-left: 1.5rem;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.genre-line {
+  margin-top: 0.5rem;
+  padding-left: 2.5rem;
 }
 
 .year {
   margin-top: 0;
   margin-bottom: 0;
-  margin-left: 1.7rem;
+  list-style: none;
 }
 
 .us-rating,
 .genre,
 .seasons {
-  margin-left: 0.3rem;
-  text-align: top;
-  margin-top: 0;
-  margin-bottom: 0;
+  margin-left: 1.2rem;
 }
 
 .genre {
-  margin-left: 2.9rem;
+  margin-left: 1rem;
   margin-top: 0;
   margin-bottom: 0;
   font-size: 15px;
@@ -130,7 +151,7 @@ input:hover {
   padding: 0.5rem 2.5rem;
   border-radius: 11px;
   margin-left: 3rem;
-  margin-top: 3rem;
+  margin-top: 2rem;
 }
 
 .summary {
