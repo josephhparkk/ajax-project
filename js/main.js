@@ -55,33 +55,33 @@ function getShowDetail(id) {
 }
 
 function renderSummary(entry) {
-  var div1 = document.createElement('div');
-  div1.setAttribute('class', 'small-container');
+  var smallContainer = document.createElement('div');
+  smallContainer.setAttribute('class', 'small-container');
 
-  var div2 = document.createElement('div');
-  div2.setAttribute('class', 'card');
-  div1.appendChild(div2);
+  var card = document.createElement('div');
+  card.setAttribute('class', 'card');
+  smallContainer.appendChild(card);
 
-  var div3 = document.createElement('div');
-  div3.setAttribute('class', 'row');
-  div2.appendChild(div3);
+  var row = document.createElement('div');
+  row.setAttribute('class', 'row');
+  card.appendChild(row);
 
-  var div4 = document.createElement('div');
-  div4.setAttribute('class', 'column-third');
-  div3.appendChild(div4);
+  var posterHolder = document.createElement('div');
+  posterHolder.setAttribute('class', 'column-third');
+  row.appendChild(posterHolder);
 
   var img = document.createElement('img');
   img.setAttribute('class', 'poster');
   img.setAttribute('src', entry.poster);
-  div4.appendChild(img);
+  posterHolder.appendChild(img);
 
-  var div5 = document.createElement('div');
-  div5.setAttribute('class', 'column-two-third');
-  div3.appendChild(div5);
+  var tvShowHeadHolder = document.createElement('div');
+  tvShowHeadHolder.setAttribute('class', 'column-two-third');
+  row.appendChild(tvShowHeadHolder);
 
-  var div6 = document.createElement('div');
-  div6.setAttribute('class', 'row title');
-  div5.appendChild(div6);
+  var tvShowHeader = document.createElement('div');
+  tvShowHeader.setAttribute('class', 'row title');
+  tvShowHeadHolder.appendChild(tvShowHeader);
 
   var title = document.createElement('h3');
   title.textContent = entry.title;
@@ -91,66 +91,76 @@ function renderSummary(entry) {
   var star = document.createElement('i');
   star.setAttribute('class', 'fa-solid fa-star');
 
-  div6.appendChild(title);
-  div6.appendChild(rating);
-  div6.appendChild(star);
+  tvShowHeader.appendChild(title);
+  tvShowHeader.appendChild(rating);
+  tvShowHeader.appendChild(star);
 
-  var div7 = document.createElement('div');
-  div7.setAttribute('class', 'row summary-styling');
-  div5.appendChild(div7);
+  var tvShowInfo = document.createElement('div');
+  tvShowInfo.setAttribute('class', 'row summary-styling');
+  tvShowHeadHolder.appendChild(tvShowInfo);
 
-  var ul1 = document.createElement('ul');
-  ul1.setAttribute('class', 'first-line');
-  div7.appendChild(ul1);
+  var listOfInfo = document.createElement('ul');
+  listOfInfo.setAttribute('class', 'first-line');
+  tvShowInfo.appendChild(listOfInfo);
+
+  var span1 = document.createElement('span');
+  var span2 = document.createElement('span');
+  var span3 = document.createElement('span');
 
   var year = document.createElement('li');
+  year.appendChild(span1);
   year.setAttribute('class', 'year');
-  year.textContent = entry.year;
-  ul1.appendChild(year);
+  span1.textContent = entry.year;
+  listOfInfo.appendChild(year);
 
   var usRating = document.createElement('li');
+  usRating.appendChild(span2);
   usRating.setAttribute('class', 'us-rating');
-  usRating.textContent = entry.usRating;
-  ul1.appendChild(usRating);
+  span2.textContent = entry.usRating;
+  listOfInfo.appendChild(usRating);
 
   var seasons = document.createElement('li');
+  seasons.appendChild(span3);
   seasons.setAttribute('class', 'seasons');
-  seasons.textContent = entry.seasons + ' Season';
-  ul1.appendChild(seasons);
+  span3.textContent = entry.seasons + ' Season';
+  listOfInfo.appendChild(seasons);
 
-  var div8 = document.createElement('div');
-  div8.setAttribute('class', 'row');
-  div5.appendChild(div8);
+  var row2 = document.createElement('div');
+  row2.setAttribute('class', 'row');
+  tvShowHeadHolder.appendChild(row2);
 
-  var ul2 = document.createElement('ul');
-  div8.appendChild(ul2);
+  var genreHolder = document.createElement('ul');
+  genreHolder.setAttribute('class', 'genre-line');
+  row2.appendChild(genreHolder);
 
   var genre = document.createElement('li');
   genre.setAttribute('class', 'genre');
-  genre.textContent = entry.genre;
-  ul2.appendChild(genre);
+  genreHolder.appendChild(genre);
+  var span4 = document.createElement('span');
+  genre.appendChild(span4);
+  span4.textContent = entry.genre;
 
-  var div9 = document.createElement('div');
-  div9.setAttribute('class', 'row');
-  div5.appendChild(div9);
+  var row3 = document.createElement('div');
+  row3.setAttribute('class', 'row');
+  tvShowHeadHolder.appendChild(row3);
 
   var playButton = document.createElement('button');
   playButton.setAttribute('class', 'play');
-  div9.appendChild(playButton);
+  row3.appendChild(playButton);
 
   var playIcon = document.createElement('i');
   playIcon.setAttribute('class', 'fa-solid fa-play');
   playButton.appendChild(playIcon);
 
-  var div10 = document.createElement('div');
-  div10.setAttribute('class', 'row summary');
-  div2.appendChild(div10);
+  var plotSummary = document.createElement('div');
+  plotSummary.setAttribute('class', 'row summary');
+  card.appendChild(plotSummary);
 
   var summary = document.createElement('p');
-  div10.appendChild(summary);
+  plotSummary.appendChild(summary);
   summary.textContent = entry.plot;
 
-  return div1;
+  return smallContainer;
 }
 
 var $searchPage = document.querySelector('.search-page');
@@ -164,7 +174,7 @@ $homeButton.addEventListener('click', goHome);
 function goHome(event) {
   $searchPage.classList.remove('hidden');
   var $oneCard = document.querySelector('.one-card');
-  $oneCard.innerHTML = '';
+  $oneCard.replaceChildren();
 }
 
 var $searchLogo = document.querySelector('.search-logo');
@@ -173,6 +183,7 @@ $searchLogo.addEventListener('click', search);
 function search(event) {
   if (event.target && event.target.matches('.search-logo')) {
     var text = $search.elements.search.value;
+    $search.reset();
     getShowId(text);
   }
 }

@@ -108,7 +108,7 @@ input[type="search"]::-webkit-search-results-decoration {
 }
 
 .rating {
-  margin-top: 1.5rem;
+  margin-top: 1.35rem;
   margin-left: 0.5rem;
   font-size: 14px;
 }
@@ -122,19 +122,22 @@ input[type="search"]::-webkit-search-results-decoration {
 
 .genre-line {
   margin-top: 0.5rem;
-  padding-left: 2.5rem;
+  margin-left: 0.3rem;
 }
 
 .year {
   margin-top: 0;
   margin-bottom: 0;
   list-style: none;
+  margin-left: 0.4rem;
+  margin-right: -0.2rem;
 }
 
 .us-rating,
 .genre,
 .seasons {
-  margin-left: 1.2rem;
+  margin-top: 0.15rem;
+  margin-left: 1.6rem;
 }
 
 .genre {
@@ -151,9 +154,13 @@ input[type="search"]::-webkit-search-results-decoration {
   padding: 0.5rem 2.5rem;
   border-radius: 11px;
   margin-left: 3rem;
-  margin-top: 2rem;
+  margin-top: 1.3rem;
 }
 
 .summary {
   padding: 0 1rem;
+}
+
+li span {
+  margin-left: -0.4rem;
 }
