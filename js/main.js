@@ -103,26 +103,26 @@ function renderSummary(entry) {
   listOfInfo.setAttribute('class', 'first-line');
   tvShowInfo.appendChild(listOfInfo);
 
-  var span1 = document.createElement('span');
-  var span2 = document.createElement('span');
-  var span3 = document.createElement('span');
+  var yearSpan = document.createElement('span');
+  var usRatingSpan = document.createElement('span');
+  var seasonSpan = document.createElement('span');
 
   var year = document.createElement('li');
-  year.appendChild(span1);
+  year.appendChild(yearSpan);
   year.setAttribute('class', 'year');
-  span1.textContent = entry.year;
+  yearSpan.textContent = entry.year;
   listOfInfo.appendChild(year);
 
   var usRating = document.createElement('li');
-  usRating.appendChild(span2);
+  usRating.appendChild(usRatingSpan);
   usRating.setAttribute('class', 'us-rating');
-  span2.textContent = entry.usRating;
+  usRatingSpan.textContent = entry.usRating;
   listOfInfo.appendChild(usRating);
 
   var seasons = document.createElement('li');
-  seasons.appendChild(span3);
+  seasons.appendChild(seasonSpan);
   seasons.setAttribute('class', 'seasons');
-  span3.textContent = entry.seasons + ' Season';
+  seasonSpan.textContent = entry.seasons + ' Season';
   listOfInfo.appendChild(seasons);
 
   var row2 = document.createElement('div');
@@ -136,9 +136,9 @@ function renderSummary(entry) {
   var genre = document.createElement('li');
   genre.setAttribute('class', 'genre');
   genreHolder.appendChild(genre);
-  var span4 = document.createElement('span');
-  genre.appendChild(span4);
-  span4.textContent = entry.genre;
+  var genreSpan = document.createElement('span');
+  genre.appendChild(genreSpan);
+  genreSpan.textContent = entry.genre;
 
   var row3 = document.createElement('div');
   row3.setAttribute('class', 'row');
