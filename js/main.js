@@ -6,6 +6,7 @@ function getSearchValue(event) {
   event.preventDefault();
   var text = $search.elements.search.value;
   getShowId(text);
+  $search.reset();
 }
 
 function getShowId(title) {
@@ -44,6 +45,7 @@ function getShowDetail(id) {
       genre: xhr.response.genre_names
     };
     console.log(showDetailObject);
+    data.showList.push(showDetailObject);
   });
   xhr.send();
 }
