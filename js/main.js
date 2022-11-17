@@ -66,7 +66,6 @@ function getShowDetail(id) {
 function renderSummary(entry) {
   var smallContainer = document.createElement('div');
   smallContainer.setAttribute('class', 'small-container');
-  smallContainer.setAttribute('data-entry-id', entry.entryId);
 
   var card = document.createElement('div');
   card.setAttribute('class', 'card');
