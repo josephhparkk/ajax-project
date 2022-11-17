@@ -1,7 +1,14 @@
 /* eslint-disable no-console */
+// query selector
 var $oneCard = document.querySelector('.one-card');
 var $search = document.querySelector('#searching');
+var $searchPage = document.querySelector('.search-page');
+var $homeButton = document.querySelector('.fa-house');
+var $searchLogo = document.querySelector('.search-logo');
 
+// event listener
+$homeButton.addEventListener('click', goHome);
+$searchLogo.addEventListener('click', search);
 $search.addEventListener('submit', getSearchValue);
 
 function getSearchValue(event) {
@@ -13,7 +20,7 @@ function getSearchValue(event) {
 
 function getShowId(title) {
   var xhr = new XMLHttpRequest();
-  xhr.open('GET', 'https://api.watchmode.com/v1/search/?apiKey=QE6cb8xjAt1kyYahavgtImCXbtkO5RVOIRNCP3Or&search_field=name&types=tv&search_value=' + title);
+  xhr.open('GET', 'https://api.watchmode.com/v1/search/?apiKey=4mbS94vaFmSc4pd3oZZesCnNtKWO30tLKnWHT5Bj&search_field=name&types=tv&search_value=' + title);
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
     console.log(xhr.status);
@@ -23,6 +30,7 @@ function getShowId(title) {
       if (title.toLowerCase() === titleResults[i].name.toLowerCase()) {
         var titleId = titleResults[i].id;
         getShowDetail(titleId);
+        break;
       }
     }
   });
@@ -31,7 +39,7 @@ function getShowId(title) {
 
 function getShowDetail(id) {
   var xhr = new XMLHttpRequest();
-  xhr.open('GET', 'https://api.watchmode.com/v1/title/' + id + '/details/?apiKey=QE6cb8xjAt1kyYahavgtImCXbtkO5RVOIRNCP3Or&append_to_response=sources');
+  xhr.open('GET', 'https://api.watchmode.com/v1/title/' + id + '/details/?apiKey=4mbS94vaFmSc4pd3oZZesCnNtKWO30tLKnWHT5Bj&append_to_response=sources');
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
     console.log(xhr.status);
@@ -45,18 +53,26 @@ function getShowDetail(id) {
       seasons: xhr.response.sources[0].seasons,
       plot: xhr.response.plot_overview,
       poster: xhr.response.poster,
-      genre: xhr.response.genre_names
+      genre: xhr.response.genre_names,
+      entryId: data.nextEntryId
     };
-    console.log(showDetailObject);
     $oneCard.append(renderSummary(showDetailObject));
     goToSummaryPage(showDetailObject);
+    data.currentCard = showDetailObject;
+    data.view = 'summary-page';
+    data.nextEntryId++;
+    var $add = document.querySelector('.fa-plus');
+    $add.addEventListener('click', addToMyList);
+    addToMyList(event);
+
   });
   xhr.send();
 }
-
+// DOM TREE
 function renderSummary(entry) {
   var smallContainer = document.createElement('div');
   smallContainer.setAttribute('class', 'small-container');
+  smallContainer.setAttribute('data-entry-id', entry.entryId);
 
   var card = document.createElement('div');
   card.setAttribute('class', 'card');
@@ -152,6 +168,14 @@ function renderSummary(entry) {
   playIcon.setAttribute('class', 'fa-solid fa-play');
   playButton.appendChild(playIcon);
 
+  var addButton = document.createElement('button');
+  addButton.setAttribute('class', 'add');
+  row3.appendChild(addButton);
+
+  var addIcon = document.createElement('i');
+  addIcon.setAttribute('class', 'fa-solid fa-xl fa-plus');
+  addButton.appendChild(addIcon);
+
   var plotSummary = document.createElement('div');
   plotSummary.setAttribute('class', 'row summary');
   card.appendChild(plotSummary);
@@ -163,27 +187,29 @@ function renderSummary(entry) {
   return smallContainer;
 }
 
-var $searchPage = document.querySelector('.search-page');
-
 function goToSummaryPage(event) {
   $searchPage.classList.add('hidden');
 }
 
-var $homeButton = document.querySelector('.fa-house');
-$homeButton.addEventListener('click', goHome);
 function goHome(event) {
   $searchPage.classList.remove('hidden');
   var $oneCard = document.querySelector('.one-card');
   $oneCard.replaceChildren();
+  data.currentCard = null;
 }
-
-var $searchLogo = document.querySelector('.search-logo');
-$searchLogo.addEventListener('click', search);
 
 function search(event) {
   if (event.target && event.target.matches('.search-logo')) {
     var text = $search.elements.search.value;
     $search.reset();
     getShowId(text);
+  }
+}
+
+function addToMyList(event) {
+  var $add = document.querySelector('.fa-plus');
+  if (event.target === $add) {
+    event.target.classList.replace('fa-plus', 'fa-check');
+    data.savedList.push(data.currentCard);
   }
 }
