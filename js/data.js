@@ -1,7 +1,8 @@
 /* exported data */
 var data = {
   view: 'search-page',
-  showList: [],
+  currentCard: null,
+  savedList: [],
   nextEntryId: 1
 };
 

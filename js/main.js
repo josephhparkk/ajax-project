@@ -1,7 +1,14 @@
 /* eslint-disable no-console */
+// query selector
 var $oneCard = document.querySelector('.one-card');
 var $search = document.querySelector('#searching');
+var $searchPage = document.querySelector('.search-page');
+var $homeButton = document.querySelector('.fa-house');
+var $searchLogo = document.querySelector('.search-logo');
 
+// event listener
+$homeButton.addEventListener('click', goHome);
+$searchLogo.addEventListener('click', search);
 $search.addEventListener('submit', getSearchValue);
 
 function getSearchValue(event) {
@@ -49,12 +56,11 @@ function getShowDetail(id) {
       genre: xhr.response.genre_names,
       entryId: data.nextEntryId
     };
-    console.log(showDetailObject);
     $oneCard.append(renderSummary(showDetailObject));
     goToSummaryPage(showDetailObject);
-    data.showList.push(showDetailObject);
+    data.currentCard = showDetailObject;
     data.view = 'summary-page';
-
+    data.nextEntryId++;
     var $add = document.querySelector('.fa-plus');
     $add.addEventListener('click', addToMyList);
     addToMyList(event);
@@ -62,10 +68,11 @@ function getShowDetail(id) {
   });
   xhr.send();
 }
-
+// DOM TREE
 function renderSummary(entry) {
   var smallContainer = document.createElement('div');
   smallContainer.setAttribute('class', 'small-container');
+  smallContainer.setAttribute('data-entry-id', entry.entryId);
 
   var card = document.createElement('div');
   card.setAttribute('class', 'card');
@@ -180,22 +187,16 @@ function renderSummary(entry) {
   return smallContainer;
 }
 
-var $searchPage = document.querySelector('.search-page');
-
 function goToSummaryPage(event) {
   $searchPage.classList.add('hidden');
 }
 
-var $homeButton = document.querySelector('.fa-house');
-$homeButton.addEventListener('click', goHome);
 function goHome(event) {
   $searchPage.classList.remove('hidden');
   var $oneCard = document.querySelector('.one-card');
   $oneCard.replaceChildren();
+  data.currentCard = null;
 }
-
-var $searchLogo = document.querySelector('.search-logo');
-$searchLogo.addEventListener('click', search);
 
 function search(event) {
   if (event.target && event.target.matches('.search-logo')) {
@@ -207,9 +208,8 @@ function search(event) {
 
 function addToMyList(event) {
   var $add = document.querySelector('.fa-plus');
-  $add.addEventListener('click', addToMyList);
   if (event.target === $add) {
     event.target.classList.replace('fa-plus', 'fa-check');
-    data.nextEntryId++;
+    data.savedList.push(data.currentCard);
   }
 }
