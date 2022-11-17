@@ -45,11 +45,19 @@ function getShowDetail(id) {
       seasons: xhr.response.sources[0].seasons,
       plot: xhr.response.plot_overview,
       poster: xhr.response.poster,
-      genre: xhr.response.genre_names
+      genre: xhr.response.genre_names,
+      entryId: data.nextEntryId
     };
     console.log(showDetailObject);
     $oneCard.append(renderSummary(showDetailObject));
     goToSummaryPage(showDetailObject);
+    data.showList.push(showDetailObject);
+    data.view = 'summary-page';
+
+    var $add = document.querySelector('.fa-plus');
+    $add.addEventListener('click', addToMyList);
+    addToMyList(event);
+
   });
   xhr.send();
 }
@@ -152,6 +160,14 @@ function renderSummary(entry) {
   playIcon.setAttribute('class', 'fa-solid fa-play');
   playButton.appendChild(playIcon);
 
+  var addButton = document.createElement('button');
+  addButton.setAttribute('class', 'add');
+  row3.appendChild(addButton);
+
+  var addIcon = document.createElement('i');
+  addIcon.setAttribute('class', 'fa-solid fa-xl fa-plus');
+  addButton.appendChild(addIcon);
+
   var plotSummary = document.createElement('div');
   plotSummary.setAttribute('class', 'row summary');
   card.appendChild(plotSummary);
@@ -185,5 +201,14 @@ function search(event) {
     var text = $search.elements.search.value;
     $search.reset();
     getShowId(text);
+  }
+}
+
+function addToMyList(event) {
+  var $add = document.querySelector('.fa-plus');
+  $add.addEventListener('click', addToMyList);
+  if (event.target === $add) {
+    event.target.classList.replace('fa-plus', 'fa-check');
+    data.nextEntryId++;
   }
 }
