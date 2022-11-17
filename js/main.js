@@ -13,7 +13,7 @@ function getSearchValue(event) {
 
 function getShowId(title) {
   var xhr = new XMLHttpRequest();
-  xhr.open('GET', 'https://api.watchmode.com/v1/search/?apiKey=QE6cb8xjAt1kyYahavgtImCXbtkO5RVOIRNCP3Or&search_field=name&types=tv&search_value=' + title);
+  xhr.open('GET', 'https://api.watchmode.com/v1/search/?apiKey=4mbS94vaFmSc4pd3oZZesCnNtKWO30tLKnWHT5Bj&search_field=name&types=tv&search_value=' + title);
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
     console.log(xhr.status);
@@ -23,6 +23,7 @@ function getShowId(title) {
       if (title.toLowerCase() === titleResults[i].name.toLowerCase()) {
         var titleId = titleResults[i].id;
         getShowDetail(titleId);
+        break;
       }
     }
   });
@@ -31,7 +32,7 @@ function getShowId(title) {
 
 function getShowDetail(id) {
   var xhr = new XMLHttpRequest();
-  xhr.open('GET', 'https://api.watchmode.com/v1/title/' + id + '/details/?apiKey=QE6cb8xjAt1kyYahavgtImCXbtkO5RVOIRNCP3Or&append_to_response=sources');
+  xhr.open('GET', 'https://api.watchmode.com/v1/title/' + id + '/details/?apiKey=4mbS94vaFmSc4pd3oZZesCnNtKWO30tLKnWHT5Bj&append_to_response=sources');
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
     console.log(xhr.status);
@@ -65,6 +66,7 @@ function getShowDetail(id) {
 function renderSummary(entry) {
   var smallContainer = document.createElement('div');
   smallContainer.setAttribute('class', 'small-container');
+  smallContainer.setAttribute('data-entry-id', entry.entryId);
 
   var card = document.createElement('div');
   card.setAttribute('class', 'card');
