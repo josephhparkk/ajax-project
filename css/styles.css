@@ -24,7 +24,7 @@ header {
 }
 
 .nav-bar {
-  margin-top: 1.8rem;
+  margin-top: 2rem;
   text-align: right;
 }
 
@@ -212,14 +212,20 @@ li span {
   margin-top: 0;
 }
 
+a {
+  cursor: auto;
+}
+
 .image {
   list-style: none;
   margin-right: 1.3rem;
   margin-bottom: 1rem;
+  cursor: auto;
 }
 
 .image-poster {
   margin-left: 3.5rem;
+  cursor: pointer;
 }
 
 .flex {

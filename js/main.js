@@ -59,12 +59,10 @@ function getShowDetail(id) {
     $oneCard.append(renderSummary(showDetailObject));
     goToSummaryPage(showDetailObject);
     data.currentCard = showDetailObject;
-    data.nextEntryId++;
 
     var $add = document.querySelector('.fa-plus');
     $add.addEventListener('click', addToMyList);
     addToMyList(event);
-
   });
   xhr.send();
 }
@@ -210,12 +208,18 @@ function search(event) {
 }
 
 var $unorderedList = document.querySelector('ul');
+
 function addToMyList(event) {
   var $add = document.querySelector('.fa-plus');
   if (event.target === $add) {
     event.target.classList.replace('fa-plus', 'fa-check');
+    data.nextEntryId++;
     data.savedList.push(data.currentCard);
-    $unorderedList.append(addShowToMyList(data.currentCard));
+    $unorderedList.append(addPosterToMyList(data.currentCard));
+
+    var $aImage = document.querySelector('a');
+    $aImage.addEventListener('click', goBackToDelete);
+    goBackToDelete(event);
   }
 }
 
@@ -233,17 +237,19 @@ function goToMyList(event) {
 }
 
 // DOM TREE #2
-
-function addShowToMyList(entry) {
+function addPosterToMyList(entry) {
+  var anchorImage = document.createElement('a');
+  anchorImage.setAttribute('href', '#');
   var posterList = document.createElement('li');
   posterList.setAttribute('class', 'image');
+  anchorImage.appendChild(posterList);
   var posterImage = document.createElement('img');
   posterImage.setAttribute('class', 'image-poster');
   posterImage.setAttribute('src', entry.poster);
-
+  posterImage.setAttribute('data-entry-id', entry.entryId);
   posterList.appendChild(posterImage);
 
-  return posterList;
+  return anchorImage;
 }
 
 window.addEventListener('DOMContentLoaded', function (event) {
@@ -254,9 +260,133 @@ window.addEventListener('DOMContentLoaded', function (event) {
   } else if (data.view === 'summary-page') {
     goToSummaryPage(event);
     $oneCard.append(renderSummary(data.currentCard));
-
   }
   for (var a = 0; a < data.savedList.length; a++) {
-    $unorderedList.append(addShowToMyList(data.savedList[a]));
+    $unorderedList.append(addPosterToMyList(data.savedList[a]));
   }
 });
+
+$unorderedList.addEventListener('click', goBackToDelete);
+function goBackToDelete(event) {
+  var clickedImage = event.target.closest('.image-poster');
+  if (event.target === clickedImage) {
+    var clickedId = clickedImage.getAttribute('data-entry-id');
+  }
+  for (var j = 0; j < data.savedList.length; j++) {
+    if (clickedId === data.savedList[j].entryId.toString()) {
+      $oneCard.append(renderSummaryToDelete(data.savedList[j]));
+      $myList.classList.add('hidden');
+      data.view = 'delete-page';
+    }
+  }
+}
+
+function renderSummaryToDelete(entry) {
+  var smallContainer = document.createElement('div');
+  smallContainer.setAttribute('class', 'small-container');
+  smallContainer.setAttribute('data-entry-id', entry.entryId);
+
+  var card = document.createElement('div');
+  card.setAttribute('class', 'card');
+  smallContainer.appendChild(card);
+
+  var row = document.createElement('div');
+  row.setAttribute('class', 'row');
+  card.appendChild(row);
+
+  var posterHolder = document.createElement('div');
+  posterHolder.setAttribute('class', 'column-third');
+  row.appendChild(posterHolder);
+
+  var img = document.createElement('img');
+  img.setAttribute('class', 'poster');
+  img.setAttribute('src', entry.poster);
+  posterHolder.appendChild(img);
+
+  var tvShowHeadHolder = document.createElement('div');
+  tvShowHeadHolder.setAttribute('class', 'column-two-third');
+  row.appendChild(tvShowHeadHolder);
+
+  var tvShowHeader = document.createElement('div');
+  tvShowHeader.setAttribute('class', 'row title');
+  tvShowHeadHolder.appendChild(tvShowHeader);
+
+  var title = document.createElement('h3');
+  title.textContent = entry.title;
+  var rating = document.createElement('h4');
+  rating.textContent = entry.rating;
+  rating.setAttribute('class', 'rating');
+  var star = document.createElement('i');
+  star.setAttribute('class', 'fa-solid fa-star');
+
+  tvShowHeader.appendChild(title);
+  tvShowHeader.appendChild(rating);
+  tvShowHeader.appendChild(star);
+
+  var tvShowInfo = document.createElement('div');
+  tvShowInfo.setAttribute('class', 'row summary-styling');
+  tvShowHeadHolder.appendChild(tvShowInfo);
+
+  var listOfInfo = document.createElement('ul');
+  listOfInfo.setAttribute('class', 'first-line');
+  tvShowInfo.appendChild(listOfInfo);
+
+  var yearSpan = document.createElement('span');
+  var usRatingSpan = document.createElement('span');
+  var seasonSpan = document.createElement('span');
+
+  var year = document.createElement('li');
+  year.appendChild(yearSpan);
+  year.setAttribute('class', 'year');
+  yearSpan.textContent = entry.year;
+  listOfInfo.appendChild(year);
+
+  var usRating = document.createElement('li');
+  usRating.appendChild(usRatingSpan);
+  usRating.setAttribute('class', 'us-rating');
+  usRatingSpan.textContent = entry.usRating;
+  listOfInfo.appendChild(usRating);
+
+  var seasons = document.createElement('li');
+  seasons.appendChild(seasonSpan);
+  seasons.setAttribute('class', 'seasons');
+  seasonSpan.textContent = entry.seasons + ' Season';
+  listOfInfo.appendChild(seasons);
+
+  var row2 = document.createElement('div');
+  row2.setAttribute('class', 'row');
+  tvShowHeadHolder.appendChild(row2);
+
+  var genreHolder = document.createElement('ul');
+  genreHolder.setAttribute('class', 'genre-line');
+  row2.appendChild(genreHolder);
+
+  var genre = document.createElement('li');
+  genre.setAttribute('class', 'genre');
+  genreHolder.appendChild(genre);
+  var genreSpan = document.createElement('span');
+  genre.appendChild(genreSpan);
+  genreSpan.textContent = entry.genre;
+
+  var row3 = document.createElement('div');
+  row3.setAttribute('class', 'row');
+  tvShowHeadHolder.appendChild(row3);
+
+  var playButton = document.createElement('button');
+  playButton.setAttribute('class', 'play');
+  row3.appendChild(playButton);
+
+  var playIcon = document.createElement('i');
+  playIcon.setAttribute('class', 'fa-solid fa-play');
+  playButton.appendChild(playIcon);
+
+  var plotSummary = document.createElement('div');
+  plotSummary.setAttribute('class', 'row summary');
+  card.appendChild(plotSummary);
+
+  var summary = document.createElement('p');
+  plotSummary.appendChild(summary);
+  summary.textContent = entry.plot;
+
+  return smallContainer;
+}
