@@ -193,7 +193,6 @@ function goToSummaryPage(event) {
 function goHome(event) {
   $searchPage.classList.remove('hidden');
   $myList.classList.add('hidden');
-  var $oneCard = document.querySelector('.one-card');
   $oneCard.replaceChildren();
   data.currentCard = null;
   data.view = 'search-page';
@@ -216,10 +215,6 @@ function addToMyList(event) {
     data.nextEntryId++;
     data.savedList.push(data.currentCard);
     $unorderedList.append(addPosterToMyList(data.currentCard));
-
-    var $aImage = document.querySelector('a');
-    $aImage.addEventListener('click', goBackToDelete);
-    goBackToDelete(event);
   }
 }
 
