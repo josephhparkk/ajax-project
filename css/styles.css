@@ -24,7 +24,7 @@ header {
 }
 
 .nav-bar {
-  margin-top: 1.8rem;
+  margin-top: 2rem;
   text-align: right;
 }
 
@@ -40,7 +40,7 @@ header {
 
 .search {
   text-align: center;
-  margin-top: 1rem;
+  margin-top: 2.5rem;
 }
 
 input {
@@ -183,4 +183,44 @@ input[type="search"]::-webkit-search-results-decoration {
 
 li span {
   margin-left: -0.05rem;
+}
+
+/* my list css */
+.list-container {
+  max-width: 900px;
+  margin: 0 auto;
+  justify-content: center;
+}
+
+.my-list-header {
+  margin-left: 2.3rem;
+}
+
+.image-list {
+  width: 100%;
+  justify-content: left;
+  padding-left: 0;
+  margin-left: 0.2rem;
+  margin-top: 0.2rem;
+}
+
+a {
+  cursor: auto;
+}
+
+.image {
+  list-style: none;
+  margin-right: 1.3rem;
+  margin-bottom: 2rem;
+  cursor: auto;
+}
+
+.image-poster {
+  margin-left: 3.5rem;
+  cursor: pointer;
+}
+
+.flex {
+  display: flex;
+  flex-wrap: wrap;
 }
