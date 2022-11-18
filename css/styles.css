@@ -184,3 +184,45 @@ input[type="search"]::-webkit-search-results-decoration {
 li span {
   margin-left: -0.05rem;
 }
+
+/* my list css */
+.list-container {
+  max-width: 900px;
+  margin: 0 auto;
+  justify-content: center;
+}
+
+.my-list-header {
+  margin-left: 2.3rem;
+}
+
+.medium-container {
+  max-width: 890px;
+  margin: 0 auto;
+  position: absolute;
+  justify-content: center;
+  width: 100%;
+}
+
+.image-list {
+  position: absolute;
+  justify-content: left;
+  padding-left: 0;
+  margin-left: 2.3rem;
+  margin-top: 0;
+}
+
+.image {
+  list-style: none;
+  margin-right: 1.3rem;
+  margin-bottom: 1rem;
+}
+
+.image-poster {
+  margin-left: 3.5rem;
+}
+
+.flex {
+  display: flex;
+  flex-wrap: wrap;
+}

@@ -193,6 +193,7 @@ function goToSummaryPage(event) {
 
 function goHome(event) {
   $searchPage.classList.remove('hidden');
+  $myList.classList.add('hidden');
   var $oneCard = document.querySelector('.one-card');
   $oneCard.replaceChildren();
   data.currentCard = null;
@@ -206,10 +207,53 @@ function search(event) {
   }
 }
 
+var $unorderedList = document.querySelector('ul');
 function addToMyList(event) {
   var $add = document.querySelector('.fa-plus');
   if (event.target === $add) {
     event.target.classList.replace('fa-plus', 'fa-check');
     data.savedList.push(data.currentCard);
+    $unorderedList.append(addShowToMyList(data.currentCard));
   }
 }
+
+// event listener for list icon
+var $myListIcon = document.querySelector('.fa-list');
+var $myList = document.querySelector('.header-list');
+$myListIcon.addEventListener('click', goToMyList);
+
+function goToMyList(event) {
+  console.log(event.target);
+  if (event.target === $myListIcon) {
+    $myList.classList.remove('hidden');
+    $searchPage.classList.add('hidden');
+    $oneCard.replaceChildren();
+    data.currentCard = null;
+    data.view = 'my-list-page';
+  }
+}
+
+// DOM TREE #2
+
+function addShowToMyList(entry) {
+  var posterList = document.createElement('li');
+  posterList.setAttribute('class', 'image');
+  var posterImage = document.createElement('img');
+  posterImage.setAttribute('class', 'image-poster');
+  posterImage.setAttribute('src', entry.poster);
+
+  posterList.appendChild(posterImage);
+
+  return posterList;
+}
+
+// window.addEventListener('DOMContentLoaded', function (event) {
+//   if (data.view === 'search-page') {
+//     goHome(event)
+//   } else if (data.view === 'entry-form') {
+//     clickNewForNewEntry(event);
+//   }
+//   for (var i = 0; i < data.entries.length; i++) {
+//     unorderedList.append(renderEntry(data.entries[i]));
+//   }
+// });
