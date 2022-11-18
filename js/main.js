@@ -59,8 +59,8 @@ function getShowDetail(id) {
     $oneCard.append(renderSummary(showDetailObject));
     goToSummaryPage(showDetailObject);
     data.currentCard = showDetailObject;
-    data.view = 'summary-page';
     data.nextEntryId++;
+
     var $add = document.querySelector('.fa-plus');
     $add.addEventListener('click', addToMyList);
     addToMyList(event);
@@ -189,6 +189,7 @@ function renderSummary(entry) {
 
 function goToSummaryPage(event) {
   $searchPage.classList.add('hidden');
+  data.view = 'summary-page';
 }
 
 function goHome(event) {
@@ -197,6 +198,7 @@ function goHome(event) {
   var $oneCard = document.querySelector('.one-card');
   $oneCard.replaceChildren();
   data.currentCard = null;
+  data.view = 'search-page';
 }
 
 function search(event) {
@@ -223,14 +225,11 @@ var $myList = document.querySelector('.header-list');
 $myListIcon.addEventListener('click', goToMyList);
 
 function goToMyList(event) {
-  console.log(event.target);
-  if (event.target === $myListIcon) {
-    $myList.classList.remove('hidden');
-    $searchPage.classList.add('hidden');
-    $oneCard.replaceChildren();
-    data.currentCard = null;
-    data.view = 'my-list-page';
-  }
+  $myList.classList.remove('hidden');
+  $searchPage.classList.add('hidden');
+  $oneCard.replaceChildren();
+  data.currentCard = null;
+  data.view = 'my-list-page';
 }
 
 // DOM TREE #2
@@ -247,13 +246,17 @@ function addShowToMyList(entry) {
   return posterList;
 }
 
-// window.addEventListener('DOMContentLoaded', function (event) {
-//   if (data.view === 'search-page') {
-//     goHome(event)
-//   } else if (data.view === 'entry-form') {
-//     clickNewForNewEntry(event);
-//   }
-//   for (var i = 0; i < data.entries.length; i++) {
-//     unorderedList.append(renderEntry(data.entries[i]));
-//   }
-// });
+window.addEventListener('DOMContentLoaded', function (event) {
+  if (data.view === 'search-page') {
+    goHome(event);
+  } else if (data.view === 'my-list-page') {
+    goToMyList(event);
+  } else if (data.view === 'summary-page') {
+    goToSummaryPage(event);
+    $oneCard.append(renderSummary(data.currentCard));
+
+  }
+  for (var a = 0; a < data.savedList.length; a++) {
+    $unorderedList.append(addShowToMyList(data.savedList[a]));
+  }
+});
