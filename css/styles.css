@@ -40,7 +40,7 @@ header {
 
 .search {
   text-align: center;
-  margin-top: 1rem;
+  margin-top: 2.5rem;
 }
 
 input {
@@ -196,20 +196,12 @@ li span {
   margin-left: 2.3rem;
 }
 
-.medium-container {
-  max-width: 890px;
-  margin: 0 auto;
-  position: absolute;
-  justify-content: center;
-  width: 100%;
-}
-
 .image-list {
-  position: absolute;
+  width: 100%;
   justify-content: left;
   padding-left: 0;
-  margin-left: 2.3rem;
-  margin-top: 0;
+  margin-left: 0.2rem;
+  margin-top: 0.2rem;
 }
 
 a {
@@ -219,7 +211,7 @@ a {
 .image {
   list-style: none;
   margin-right: 1.3rem;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
   cursor: auto;
 }
 
