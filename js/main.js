@@ -21,8 +21,6 @@ function getShowId(title) {
   xhr.open('GET', 'https://api.watchmode.com/v1/search/?apiKey=4mbS94vaFmSc4pd3oZZesCnNtKWO30tLKnWHT5Bj&search_field=name&types=tv&search_value=' + title);
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
-    console.log(xhr.status);
-    console.log(xhr.response);
     var titleResults = xhr.response.title_results;
     for (var i = 0; i < titleResults.length; i++) {
       if (title.toLowerCase() === titleResults[i].name.toLowerCase()) {
@@ -40,8 +38,6 @@ function getShowDetail(id) {
   xhr.open('GET', 'https://api.watchmode.com/v1/title/' + id + '/details/?apiKey=4mbS94vaFmSc4pd3oZZesCnNtKWO30tLKnWHT5Bj&append_to_response=sources');
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
-    console.log(xhr.status);
-    console.log(xhr.response);
 
     var showDetailObject = {
       title: xhr.response.title,
@@ -159,7 +155,6 @@ function renderSummary(entry) {
   var playButton = document.createElement('button');
   playButton.setAttribute('class', 'play');
   row3.appendChild(playButton);
-
   var playIcon = document.createElement('i');
   playIcon.setAttribute('class', 'fa-solid fa-play');
   playButton.appendChild(playIcon);
@@ -167,7 +162,6 @@ function renderSummary(entry) {
   var addButton = document.createElement('button');
   addButton.setAttribute('class', 'add');
   row3.appendChild(addButton);
-
   var addIcon = document.createElement('i');
   addIcon.setAttribute('class', 'fa-solid fa-xl fa-plus');
   addButton.appendChild(addIcon);
@@ -228,7 +222,6 @@ function goToMyList(event) {
   data.view = 'my-list-page';
 }
 
-// DOM TREE #2
 function addPosterToMyList(entry) {
   var anchorImage = document.createElement('a');
   anchorImage.setAttribute('href', '#');
@@ -369,7 +362,6 @@ function renderSummaryToDelete(entry) {
   var playButton = document.createElement('button');
   playButton.setAttribute('class', 'play');
   row3.appendChild(playButton);
-
   var playIcon = document.createElement('i');
   playIcon.setAttribute('class', 'fa-solid fa-play');
   playButton.appendChild(playIcon);
@@ -378,7 +370,6 @@ function renderSummaryToDelete(entry) {
   trashTag.setAttribute('class', 'trash');
   trashTag.setAttribute('href', '#');
   row3.appendChild(trashTag);
-
   var trashIcon = document.createElement('i');
   trashIcon.setAttribute('class', 'fa-solid fa-2xl fa-trash');
   trashTag.appendChild(trashIcon);
