@@ -1,12 +1,10 @@
 /* eslint-disable no-console */
-// query selector
 var $oneCard = document.querySelector('.one-card');
 var $search = document.querySelector('#searching');
 var $searchPage = document.querySelector('.search-page');
 var $homeButton = document.querySelector('.fa-house');
 var $searchLogo = document.querySelector('.search-logo');
 
-// event listener
 $homeButton.addEventListener('click', goHome);
 $searchLogo.addEventListener('click', search);
 $search.addEventListener('submit', getSearchValue);
@@ -66,7 +64,7 @@ function getShowDetail(id) {
   });
   xhr.send();
 }
-// DOM TREE
+
 function renderSummary(entry) {
   var smallContainer = document.createElement('div');
   smallContainer.setAttribute('class', 'small-container');
@@ -218,7 +216,6 @@ function addToMyList(event) {
   }
 }
 
-// event listener for list icon
 var $myListIcon = document.querySelector('.fa-list');
 var $myList = document.querySelector('.header-list');
 $myListIcon.addEventListener('click', goToMyList);
@@ -239,9 +236,9 @@ function addPosterToMyList(entry) {
   posterList.setAttribute('class', 'image');
   anchorImage.appendChild(posterList);
   var posterImage = document.createElement('img');
+  posterImage.setAttribute('data-entry-id', entry.entryId);
   posterImage.setAttribute('class', 'image-poster');
   posterImage.setAttribute('src', entry.poster);
-  posterImage.setAttribute('data-entry-id', entry.entryId);
   posterList.appendChild(posterImage);
 
   return anchorImage;
@@ -262,11 +259,10 @@ window.addEventListener('DOMContentLoaded', function (event) {
 });
 
 $unorderedList.addEventListener('click', goBackToDelete);
+
 function goBackToDelete(event) {
   var clickedImage = event.target.closest('.image-poster');
-  if (event.target === clickedImage) {
-    var clickedId = clickedImage.getAttribute('data-entry-id');
-  }
+  var clickedId = clickedImage.getAttribute('data-entry-id');
   for (var j = 0; j < data.savedList.length; j++) {
     if (clickedId === data.savedList[j].entryId.toString()) {
       $oneCard.append(renderSummaryToDelete(data.savedList[j]));
@@ -274,11 +270,14 @@ function goBackToDelete(event) {
       data.view = 'delete-page';
     }
   }
+  var $trashIcon = document.querySelector('.fa-trash');
+  $trashIcon.addEventListener('click', deleteTvShow);
 }
 
 function renderSummaryToDelete(entry) {
   var smallContainer = document.createElement('div');
   smallContainer.setAttribute('class', 'small-container');
+  smallContainer.setAttribute('class', 'each-card');
   smallContainer.setAttribute('data-entry-id', entry.entryId);
 
   var card = document.createElement('div');
@@ -375,6 +374,15 @@ function renderSummaryToDelete(entry) {
   playIcon.setAttribute('class', 'fa-solid fa-play');
   playButton.appendChild(playIcon);
 
+  var trashTag = document.createElement('a');
+  trashTag.setAttribute('class', 'trash');
+  trashTag.setAttribute('href', '#');
+  row3.appendChild(trashTag);
+
+  var trashIcon = document.createElement('i');
+  trashIcon.setAttribute('class', 'fa-solid fa-2xl fa-trash');
+  trashTag.appendChild(trashIcon);
+
   var plotSummary = document.createElement('div');
   plotSummary.setAttribute('class', 'row summary');
   card.appendChild(plotSummary);
@@ -384,4 +392,35 @@ function renderSummaryToDelete(entry) {
   summary.textContent = entry.plot;
 
   return smallContainer;
+}
+
+var $modal = document.querySelector('.modal');
+
+function deleteTvShow(event) {
+  $modal.classList.remove('hidden');
+}
+
+var $cancelButton = document.querySelector('.cancel');
+$cancelButton.addEventListener('click', cancelDelete);
+function cancelDelete(event) {
+  $modal.classList.add('hidden');
+}
+
+var confirmButton = document.querySelector('.confirm');
+confirmButton.addEventListener('click', deleteEntry);
+
+function deleteEntry(event) {
+  if (event.target.matches('.confirm')) {
+    $modal.classList.add('hidden');
+    goToMyList(event);
+
+    var $imageList = document.querySelectorAll('.image-poster');
+    var $anchorList = document.querySelectorAll('a');
+    for (var p = 0; p < data.savedList.length; p++) {
+      if ($imageList[p].getAttribute('data-entry-id') === data.savedList[p].entryId.toString()) {
+        data.savedList.splice(data.savedList[p], 1);
+        $anchorList[p].remove();
+      }
+    }
+  }
 }
