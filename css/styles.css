@@ -3,7 +3,6 @@ body {
   font-family: Rosario, sans-serif;
 }
 
-/* header */
 .logo {
   margin-top: 0.5rem;
   width: 150px;
@@ -36,8 +35,6 @@ header {
 .fa-list:hover {
   cursor: pointer;
 }
-
-/* body */
 
 .search {
   text-align: center;
@@ -82,7 +79,6 @@ input[type="search"]::-webkit-search-results-decoration {
   cursor: pointer;
 }
 
-/* feature #2 */
 .small-container {
   max-width: 390px;
   margin: 0 auto;
@@ -197,7 +193,6 @@ li span {
   margin-left: -0.05rem;
 }
 
-/* my list css */
 .list-container {
   max-width: 900px;
   margin: 0 auto;
@@ -236,8 +231,6 @@ a {
   display: flex;
   flex-wrap: wrap;
 }
-
-/* feature #5 */
 
 .fa-trash {
   color: #5065a8;
