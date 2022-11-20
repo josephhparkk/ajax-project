@@ -411,6 +411,7 @@ function deleteEntry(event) {
       if ($imageList[p].getAttribute('data-entry-id') === data.savedList[p].entryId.toString()) {
         data.savedList.splice(data.savedList[p], 1);
         $anchorList[p].remove();
+        console.log($anchorList[0].remove());
       }
     }
   }

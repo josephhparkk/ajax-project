@@ -17,32 +17,28 @@ header {
 .fa-house {
   color: #5065a8;
   margin-right: 0.5rem;
-}
-
-.fa-house:hover {
   cursor: pointer;
 }
 
 .nav-bar {
   margin-top: 2rem;
   text-align: right;
+  padding-right: 0;
 }
 
 .fa-list {
   color: #5065a8;
-}
-
-.fa-list:hover {
   cursor: pointer;
 }
 
 .search {
   text-align: center;
-  margin-top: 2.5rem;
+  margin-top: 2rem;
 }
 
 .search-bar {
   width: 350px;
+  margin-left: 1rem;
 }
 
 input {
@@ -69,13 +65,10 @@ input[type="search"]::-webkit-search-results-decoration {
   border: none;
   background: transparent;
   outline: none;
-  margin-left: -2rem;
+  margin-left: -4rem;
   width: 1%;
   object-fit: cover;
   color: #5065a8;
-}
-
-.search-logo:hover {
   cursor: pointer;
 }
 
@@ -240,6 +233,10 @@ a {
   cursor: pointer;
 }
 
+.fa-plus {
+  cursor: pointer;
+}
+
 .overlay {
   position: fixed;
   width: 100%;
@@ -292,4 +289,8 @@ a {
   width: 125px;
   margin-left: 1rem;
   cursor: pointer;
+}
+
+button {
+  border: none;
 }
