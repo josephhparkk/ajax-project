@@ -59,6 +59,10 @@
           class="search-bar">
           <button><i class="fa-solid fa-lg fa-magnifying-glass search-logo"></i></button>
         </div>
+        <div class="row loading">
+          <div class="lds-dual-ring hidden-loading"></div>
+          <div class="error"><span></span></div>
+        </div>
       </form>
     </div>
     <div data-view="summary-page" class="one-card">
@@ -66,6 +70,9 @@
     <div data-view="my-list-page" class="container hidden header-list">
       <div class="row my-list-header">
         <h1>My List</h1>
+      </div>
+      <div class="row empty-message">
+        <span class="empty-list">Please add to your list!</span>
       </div>
       <div class="container">
         <ul class="row image-list">

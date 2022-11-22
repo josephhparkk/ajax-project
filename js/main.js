@@ -4,6 +4,9 @@ var $search = document.querySelector('#searching');
 var $searchPage = document.querySelector('.search-page');
 var $homeButton = document.querySelector('.fa-house');
 var $searchLogo = document.querySelector('.search-logo');
+var $searchDiv = document.querySelector('.search');
+var $loadingSign = document.querySelector('.lds-dual-ring');
+var $emptyMessage = document.querySelector('.empty-list');
 
 $homeButton.addEventListener('click', goHome);
 $searchLogo.addEventListener('click', search);
@@ -14,6 +17,8 @@ function getSearchValue(event) {
   var text = $search.elements.search.value;
   getShowId(text);
   $search.reset();
+  $searchDiv.classList.add('hidden');
+  $loadingSign.classList.remove('hidden-loading');
 }
 
 function getShowId(title) {
@@ -21,6 +26,7 @@ function getShowId(title) {
   xhr.open('GET', 'https://api.watchmode.com/v1/search/?apiKey=4mbS94vaFmSc4pd3oZZesCnNtKWO30tLKnWHT5Bj&search_field=name&types=tv&search_value=' + title);
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
+    console.log(xhr.status);
     var titleResults = xhr.response.title_results;
     for (var i = 0; i < titleResults.length; i++) {
       if (title.toLowerCase() === titleResults[i].name.toLowerCase()) {
@@ -52,6 +58,7 @@ function getShowDetail(id) {
     };
     $oneCard.append(renderSummary(showDetailObject));
     goToSummaryPage(showDetailObject);
+
     data.currentCard = showDetailObject;
 
     var $add = document.querySelector('.fa-plus');
@@ -184,10 +191,12 @@ function goToSummaryPage(event) {
 
 function goHome(event) {
   $searchPage.classList.remove('hidden');
+  $searchDiv.classList.remove('hidden');
   $myList.classList.add('hidden');
   $oneCard.replaceChildren();
   data.currentCard = null;
   data.view = 'search-page';
+  $loadingSign.classList.add('hidden-loading');
 }
 
 function search(event) {
@@ -206,6 +215,7 @@ function addToMyList(event) {
     event.target.classList.replace('fa-plus', 'fa-check');
     data.nextEntryId++;
     data.savedList.push(data.currentCard);
+    $emptyMessage.classList.add('hidden');
     $unorderedList.append(addPosterToMyList(data.currentCard));
   }
 }
@@ -215,6 +225,9 @@ var $myList = document.querySelector('.header-list');
 $myListIcon.addEventListener('click', goToMyList);
 
 function goToMyList(event) {
+  if (data.savedList.length > 0) {
+    $emptyMessage.classList.add('hidden');
+  }
   $myList.classList.remove('hidden');
   $searchPage.classList.add('hidden');
   $oneCard.replaceChildren();
@@ -411,7 +424,9 @@ function deleteEntry(event) {
       if ($imageList[p].getAttribute('data-entry-id') === data.savedList[p].entryId.toString()) {
         data.savedList.splice(data.savedList[p], 1);
         $anchorList[p].remove();
-        console.log($anchorList[0].remove());
+      }
+      if (data.savedList.length === 0) {
+        $emptyMessage.classList.remove('hidden');
       }
     }
   }
