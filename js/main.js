@@ -17,8 +17,7 @@ function getSearchValue(event) {
   var text = $search.elements.search.value;
   getShowId(text);
   $search.reset();
-  $searchDiv.classList.add('hidden');
-  $loadingSign.classList.remove('hidden-loading');
+  displayLoading();
 }
 
 function getShowId(title) {
@@ -58,13 +57,14 @@ function getShowDetail(id) {
     };
     $oneCard.append(renderSummary(showDetailObject));
     goToSummaryPage(showDetailObject);
-
+    hideLoading();
     data.currentCard = showDetailObject;
 
     var $add = document.querySelector('.fa-plus');
     $add.addEventListener('click', addToMyList);
     addToMyList(event);
   });
+
   xhr.send();
 }
 
@@ -196,7 +196,6 @@ function goHome(event) {
   $oneCard.replaceChildren();
   data.currentCard = null;
   data.view = 'search-page';
-  $loadingSign.classList.add('hidden-loading');
 }
 
 function search(event) {
@@ -430,4 +429,13 @@ function deleteEntry(event) {
       }
     }
   }
+}
+
+function displayLoading() {
+  $loadingSign.classList.remove('hidden-loading');
+  $searchDiv.classList.add('hidden');
+}
+
+function hideLoading() {
+  $loadingSign.classList.add('hidden-loading');
 }
