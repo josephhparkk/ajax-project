@@ -16,33 +16,28 @@ header {
 
 .fa-house {
   color: #5065a8;
-  margin-right: 0.5rem;
-}
-
-.fa-house:hover {
   cursor: pointer;
 }
 
 .nav-bar {
   margin-top: 2rem;
   text-align: right;
+  padding-right: 0;
 }
 
 .fa-list {
   color: #5065a8;
-}
-
-.fa-list:hover {
   cursor: pointer;
 }
 
 .search {
   text-align: center;
-  margin-top: 2.5rem;
+  margin-top: 2rem;
 }
 
 .search-bar {
-  width: 350px;
+  width: 340px;
+  margin-left: 1rem;
 }
 
 input {
@@ -69,13 +64,9 @@ input[type="search"]::-webkit-search-results-decoration {
   border: none;
   background: transparent;
   outline: none;
-  margin-left: -2rem;
-  width: 1%;
+  margin-left: -4rem;
   object-fit: cover;
   color: #5065a8;
-}
-
-.search-logo:hover {
   cursor: pointer;
 }
 
@@ -200,7 +191,7 @@ li span {
 }
 
 .my-list-header {
-  margin-left: 1.4rem;
+  margin-left: 0.5rem;
 }
 
 .image-list {
@@ -237,6 +228,10 @@ a {
   padding: 0.5rem;
   margin-left: 0.7rem;
   margin-top: 2.3rem;
+  cursor: pointer;
+}
+
+.fa-plus {
   cursor: pointer;
 }
 
@@ -292,4 +287,55 @@ a {
   width: 125px;
   margin-left: 1rem;
   cursor: pointer;
+}
+
+button {
+  border: none;
+  background-color: #f2eee4;
+  padding-top: 0.2rem;
+}
+
+.lds-dual-ring {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  margin-top: 1rem;
+}
+
+.lds-dual-ring::after {
+  content: " ";
+  display: block;
+  width: 25px;
+  height: 25px;
+  margin: 8px;
+  border-radius: 50%;
+  border: 6px solid #5065a8;
+  border-color: #5065a8 transparent;
+  animation: lds-dual-ring 1.2s linear infinite;
+}
+
+@keyframes lds-dual-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.loading {
+  justify-content: center;
+}
+
+.hidden-loading {
+  display: none;
+}
+
+.empty-message {
+  justify-content: center;
+}
+
+.empty-list {
+  font-size: 20px;
 }
