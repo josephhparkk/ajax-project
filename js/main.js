@@ -159,12 +159,12 @@ function renderSummary(entry) {
   row3.setAttribute('class', 'row');
   tvShowHeadHolder.appendChild(row3);
 
-  var playButton = document.createElement('button');
-  playButton.setAttribute('class', 'play');
-  row3.appendChild(playButton);
-  var playIcon = document.createElement('i');
-  playIcon.setAttribute('class', 'fa-solid fa-play');
-  playButton.appendChild(playIcon);
+  // var playButton = document.createElement('button');
+  // playButton.setAttribute('class', 'play');
+  // row3.appendChild(playButton);
+  // var playIcon = document.createElement('i');
+  // playIcon.setAttribute('class', 'fa-solid fa-play');
+  // playButton.appendChild(playIcon);
 
   var addButton = document.createElement('button');
   addButton.setAttribute('class', 'add');
@@ -371,19 +371,12 @@ function renderSummaryToDelete(entry) {
   row3.setAttribute('class', 'row');
   tvShowHeadHolder.appendChild(row3);
 
-  var playButton = document.createElement('button');
-  playButton.setAttribute('class', 'play');
-  row3.appendChild(playButton);
-  var playIcon = document.createElement('i');
-  playIcon.setAttribute('class', 'fa-solid fa-play');
-  playButton.appendChild(playIcon);
-
   var trashTag = document.createElement('a');
   trashTag.setAttribute('class', 'trash');
   trashTag.setAttribute('href', '#');
   row3.appendChild(trashTag);
   var trashIcon = document.createElement('i');
-  trashIcon.setAttribute('class', 'fa-solid fa-2xl fa-trash');
+  trashIcon.setAttribute('class', 'fa-solid fa-xl fa-trash');
   trashTag.appendChild(trashIcon);
 
   var plotSummary = document.createElement('div');

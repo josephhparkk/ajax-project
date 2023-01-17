@@ -155,25 +155,14 @@ input[type="search"]::-webkit-search-results-decoration {
   font-size: 15px;
 }
 
-.play {
-  border: none;
-  background-color: #5065a8;
-  color: #ffff;
-  padding: 0.5rem 2.5rem;
-  border-radius: 11px;
-  margin-left: 3rem;
-  margin-top: 1.8rem;
-  margin-right: 1.6rem;
-}
-
 .add {
   border: none;
   background-color: #ffff;
   color: #5065a8;
   border-radius: 50%;
   padding: 0.5rem;
-  margin-left: 1rem;
-  margin-top: 1.8rem;
+  margin-left: 3rem;
+  margin-top: 1rem;
 }
 
 .summary {
@@ -203,7 +192,7 @@ li span {
 }
 
 a {
-  cursor: auto;
+  cursor: pointer;
 }
 
 .image {
@@ -226,8 +215,8 @@ a {
 .fa-trash {
   color: #5065a8;
   padding: 0.5rem;
-  margin-left: 0.7rem;
-  margin-top: 2.3rem;
+  margin-left: 3rem;
+  margin-top: 1rem;
   cursor: pointer;
 }
 
