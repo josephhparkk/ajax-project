@@ -20,11 +20,14 @@ Try the application live at [https://josephswpark.github.io/binge/](https://jose
 
 ## Features :book:
 
-- Students can search for a TV show
-- Students can view the summary of the searched TV show
-- Students can add various TV shows to `My-List`
-- Students can view their favorited show in their `My-List`
-- Students can remove the show from their `My-List` once they're done watching the show or if they become uninterested
+* Students can search for a TV show
+* Students can view the summary of the searched TV show
+* Students can add various TV shows to `My-List`
+* Students can view their favorited show in their `My-List`
+* Students can remove the show from their `My-List` once they're done watching the show or if they become uninterested
+
+## Stretch Features :notebook_with_decorative_cover:
+* Students can click on play button to watch the preview of the show
 
 ## Preview :eyes:
 
