@@ -159,13 +159,6 @@ function renderSummary(entry) {
   row3.setAttribute('class', 'row');
   tvShowHeadHolder.appendChild(row3);
 
-  // var playButton = document.createElement('button');
-  // playButton.setAttribute('class', 'play');
-  // row3.appendChild(playButton);
-  // var playIcon = document.createElement('i');
-  // playIcon.setAttribute('class', 'fa-solid fa-play');
-  // playButton.appendChild(playIcon);
-
   var addButton = document.createElement('button');
   addButton.setAttribute('class', 'add');
   row3.appendChild(addButton);
@@ -406,6 +399,7 @@ var confirmButton = document.querySelector('.confirm');
 confirmButton.addEventListener('click', deleteEntry);
 
 function deleteEntry(event) {
+  console.log(data.savedList);
   if (event.target.matches('.confirm')) {
     $modal.classList.add('hidden');
     goToMyList(event);
